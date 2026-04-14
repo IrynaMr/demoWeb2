@@ -4,6 +4,8 @@ import com.example.demoWeb.model.User;
 import com.example.demoWeb.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,5 +38,11 @@ public class UserService {
                     log.error("User not found with email: {}", email);
                     return new RuntimeException("User not found");
                 });
+    }
+    public Optional<User> getUserByPhoneNumber(String phoneNumber) {
+        return userRepository.findByPhoneNumber(phoneNumber);
+    }
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
 }

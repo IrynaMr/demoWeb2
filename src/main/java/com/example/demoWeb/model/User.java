@@ -1,26 +1,44 @@
 package com.example.demoWeb.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
+import java.util.List;
+
 
 @Entity
 @Table(name = "users")
+
 public class User {
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String name;
-    private String email;
-    private  int age;
 
+    @Email
+    @NotBlank
+    private String email;
+
+
+    private  int age;
+    @Pattern(regexp ="\\d{10}",message = "Phone number must be 10 digits" )
+    private String phoneNumber;
     public User() {
     }
 
-    public User(String name, String email,int age) {
+    public User(String name, String email,int age, String phoneNumber) {
         this.name = name;
         this.email = email;
         this.age = age;
+        this.phoneNumber = phoneNumber;
     }
 
     public int getAge() {
@@ -53,5 +71,17 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 }

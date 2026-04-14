@@ -6,6 +6,7 @@ import com.example.demoWeb.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -30,5 +31,8 @@ public class UserController {
     public User getUserByEmail(@PathVariable String email) {
         return userService.getUserByEmail(email);
     }
-
+    @GetMapping("/phone")
+    public Optional<User> getUserByPhoneNumber(@RequestParam String phoneNumber){
+       return userService.getUserByPhoneNumber(phoneNumber);
+    }
 }
