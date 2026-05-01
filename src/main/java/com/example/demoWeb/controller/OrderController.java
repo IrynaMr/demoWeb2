@@ -24,7 +24,7 @@ public class OrderController {
     public List<Order> getOrders(@PathVariable Long userId) {
         return orderService.getOrderByUser(userId);
     }
-    @DeleteMapping("/orders/{orderId}")
+    @DeleteMapping("/orders/{Id}")
     public void deleteOrder(@PathVariable Long orderId) {
         orderService.deleteOrder(orderId);
     }
